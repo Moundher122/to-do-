@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import'package:http/http.dart' as http;
 
 Future  fetchdata()async{
-  http.Response response= await http.get(Uri.parse('http://192.168.8.120:8000/'));
+  http.Response response= await http.get(Uri.parse('http://192.168.1.5:8000/'));
    List k=[];
    var items=jsonDecode(response.body);
    for(var item in items){
@@ -25,7 +25,7 @@ class texti extends ChangeNotifier{
 
 Future addnote(String title,String body) async{
   await http.post(
-    Uri.parse('http://192.168.8.120:8000/create/'),
+    Uri.parse('http://192.168.1.5:8000/create/'),
     headers:{
       'Content-Type': 'application/json',
     },
@@ -37,7 +37,7 @@ Future addnote(String title,String body) async{
 }
 Future updatnote(int m,String t,b)async{
   await http.put(
-    Uri.parse('http://192.168.8.120:8000/${m.toString()}/update/'),
+    Uri.parse('http://192.168.1.5:8000/${m.toString()}/update/'),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -52,7 +52,7 @@ Future updatnote(int m,String t,b)async{
 Future deletenot(int m)async{
   await http.delete(
     Uri.parse(
-      'http://192.168.8.120:8000/${m.toString()}/delete'
+      'http://192.168.1.5:8000/${m.toString()}/delete'
     ),headers: {
       'Content-Type': 'application/json',
     }

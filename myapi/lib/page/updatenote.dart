@@ -78,10 +78,12 @@ class _updatenoteState extends State<updatenote> {
     return WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: () {
+        floatingActionButton: FloatingActionButton(onPressed: () async{
           int s=context.read<texti>().st[widget.st]['id'] ;
-          updatnote(s, mycon.text, youcon.text);
-          Navigator.pop(context,true);
+           await updatnote(s, mycon.text, youcon.text);
+          if (context.mounted) {
+            Navigator.pop(context,true);
+          }
         },
         child: Icon(Icons.save),
         ),

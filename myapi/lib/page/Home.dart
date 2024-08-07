@@ -45,9 +45,9 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     if(context.watch<texti>().st.isNotEmpty){
-      int i=1;
+      int i=0;
       while( i<context.watch<texti>().st.length){
-          context.watch<texti>().st[i]["created"]=changedate(context.watch<texti>().st[i]["created"]??"");
+          context.watch<texti>().st[i]["created"]=changedate(context.watch<texti>().st[i]["created"]);
           i=i+1;
       }
     }
@@ -56,16 +56,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () async{
-       final  result= await showDialog<bool>(context: context, builder:(context) {
+        onPressed: () {
+        showDialog<bool>(context: context, builder:(context) {
           return AddNote();
-        },);
-        if (result == true) {
-    // Refresh the state if the result is true
-     setState(() {
-      context.read<texti>().gettitle();
-    });
-  }
+        },).then((result) {
+          if (result==true) {
+            context.read<texti>().gettitle();
+          }
+        }, );
         },
         child: Icon(Icons.add),
       ),

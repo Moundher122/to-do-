@@ -39,9 +39,11 @@ class AddNote extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                   GestureDetector(
-                    onTap: () {
-                      addnote(titlecon.text, bodycon.text);
-                      Navigator.pop(context,true);
+                    onTap: () async {
+                      await addnote(titlecon.text, bodycon.text);
+                      if (context.mounted) {
+                        Navigator.pop(context,true);
+                      }
                       titlecon.clear();
                       bodycon.clear();
                     },
@@ -55,7 +57,7 @@ class AddNote extends StatelessWidget {
                   SizedBox(width: 10,),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context,false);
                       titlecon.clear();
                       bodycon.clear();
                     },
